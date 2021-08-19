@@ -1,0 +1,28 @@
+
+
+a{
+  text-decoration: none;
+  color: gray;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+td, th {
+  
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.listado{
+  height: 400px;
+  overflow: auto;
+  border:solid black;
+  
+}

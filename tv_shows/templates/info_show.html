@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ saludo }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    {% load static %}
+    <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+
+    <div class="container my-3">
+        <div class="row mx-auto">
+            
+        <div class="d-grid gap-2 md-flex justify-content-md-end">
+            <a href="/shows" class="btn btn-primary me-md-2" role="button" data-bs-toggle="button">Volver</a>
+        </div>
+
+            <div class="col-sm-12 col-lg-9 mx-auto">
+                <h2>TV SHOW: {{info_show.id}}</h2>
+                <h5 class='mt-2'>Titulo: {{info_show.title}}</h5>
+                <h5 class='mt-2'>Network: {{info_show.network}} </h5>
+                <h5 class='mt-2'>Release Date: {{info_show.release_date}} </52>
+                    <div class="p-3 mb-3 bg-light rounded">
+                        <h4 class="font-italic">Descripcion</h4>
+                        <p class="mb-0">{{info_show.description}}</p>
+                    </div>
+
+                    <h5 class='mt-5'>Ultima actualizacion: {{info_show.updated_at}} </h5>
+
+
+                    <div class="d-grid gap-2 d-md-block ">
+                        <a href="/shows/{{info_show.id}}/edit" class="btn btn-primary me-md-2" role="button"
+                            data-bs-toggle="button">Editar</a>
+                        <a href="/shows/{{info_show.id}}/borrar" class="btn btn-primary" role="button"
+                            data-bs-toggle="button">Borrar</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/index.js' %}"></script>
+
+
+
+
+
+</body>
+
+</html>

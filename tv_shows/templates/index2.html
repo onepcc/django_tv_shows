@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ saludo }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    {% load static %}
+    <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+
+<!-- TODO REVISAR SETTINGS PARA USAR FONTAWESOME -->
+
+<body class="bg-light">
+    <h2 class= "fw-bold text-center my-5">{{ saludo }}</h2>
+
+    <div class="container my-3">
+
+        <div class="row">
+            <div class="col-sm-12 col-lg-9 mx-auto border border-primary">
+                <h2 class="fw-bold text-center my-2">Todos los Shows:</h2>
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>ID</th>
+                        <th>Titulo</th>
+                        <th>Network</th>
+                        <th>Release Date</th>
+                        <th>Acciones</th>
+                    </tr>
+                        
+                    {% for show in tvshows%}
+                    <tr>
+                        <td>{{show.id}}</td>
+                        <td>{{show.title}}</td>
+                        <td>{{show.network}}</td>
+                        <!-- TODO FORMATO DE FECHA -->
+                        <td>{{show.release_date|date:"M d, Y"}}</td> 
+                        <td><a href='/shows/{{show.id}}'> <i class="fas fa-info-circle fa-lg" style="--fa-primary-color: gold;"> </i> Ver </a> | 
+                            <span><a href='/shows/{{show.id}}/edit'> <i class="far fa-edit fa-lg text-warning"> </i> Editar </a></span> | 
+                            <span><a href='/shows/{{show.id}}/borrar'> <i class="far fa-trash-alt fa-lg text-danger"> </i> Borrar</a></span> </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 col-3 mx-auto">
+        <a href="shows/new/" class="btn btn-primary" role="button" data-bs-toggle="button">Añade nuevo show</a>
+        
+      </div>
+
+    <script src="{% static 'js/index.js' %}"></script>
+
+</body>
+</html>
+
+
+
+            
+
+
+
+
+
