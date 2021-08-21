@@ -1,74 +1,64 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ saludo }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
-    {% load static %}
-    <script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-
+{% extends 'base.html' %}
 <body>
-    
+    {% block content %}
     <h2 class="fw-bold text-center my-5">{{ saludo }}</h2>
     
     <div class="container my-3">
         
+        <!-- TODO Mensajes flash para manejo de errores -->
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
         <div class="d-grid gap-2 md-flex justify-content-md-end">
             <a href="/shows" class="btn btn-primary me-md-2" role="button" data-bs-toggle="button">Volver</a>
         </div>
-
+        
         <div class="row">
             <div class="col-sm-12 col-lg-9 mx-auto">
                 <h2 class="fw-bold my-5">Añade un TV SHOW</h2>
                 
                 <form action='/shows/new/{{show.id}}' method="post">
                     {% csrf_token %}
-                    
+                    <!-- TODO Arreglar placeholder para mostrar valores a validar -->
                     <div class="form-group mb-3 col-md-8">
                         <label for="titulo_show_id" class="form-label">Titulo</label>
-                        <input type="text" placeholder='Titulo Show' class="form-control" id="titulo_show_id"
-                            name="title_show" required>
+                        <input type="text" placeholder='TITULO Show ,al menos 2 caracteres' class="form-control" id="titulo_show_id"
+                        name="title_show" required value = {{request.session.show_title}}>
                     </div>
                     
                     <div class="row mb-3">
                         <div class=" col-md-4">
                             <label for="network" class="form-label">Network</label>
-                            <input type="text" placeholder='Network Show' class="form-control" id="network"
-                                name="network_show" required>
+                            <input type="text" placeholder='NETWORK Show, al menos 3 caracteres' class="form-control" id="network"
+                            name="network_show" required value = {{request.session.network_show}}>
                         </div>
-                    
+                        
                         <div class="col-md-4">
                             <label for="date" class="form-label">Release Date</label>
                             <input type="date" placeholder='M/d/A ' class="form-control" id="date"
-                            name="date_show" required>
+                            name="date_show" required value = {{request.session.date_show}}>
                         </div>
                     </div>
-                
-                
-
+                    
+                    
+                    
                     <div class="form-group mb-3 col-md-8">
                         <label for="desc_show" class="form-label">Descripcion</label>
-                        <textarea class="form-control" id="desc_show" rows="3" name="desc_show" required></textarea>
+                        <textarea class="form-control" id="desc_show" rows="3" name="desc_show">{{request.session.desc_show}}</textarea>
                     </div>
-
+                    
                     <button type="submit" class="btn btn-primary">Añade Show</button>
                 </form>
             </div>
-
-           
+            
+            
         </div>
     </div>
-
     
-    <script src="{% static 'js/index.js' %}"></script>
-
-</body>
-
-</html>
+    {% endblock %}
+    
